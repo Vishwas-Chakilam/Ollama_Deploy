@@ -85,7 +85,7 @@ Larger models (1.5b+) will **OOM** on the free tier.
 | `MODEL_NAME` | `qwen2.5:0.5b` | Model to serve |
 | `PORT` | `11434` | Set automatically by Render |
 | `OLLAMA_CONTEXT_LENGTH` | `2048` | Lower = less RAM |
-| `OLLAMA_KEEP_ALIVE` | `5m` | Unload model from RAM when idle |
+| `OLLAMA_KEEP_ALIVE` | `-1` | Keep model loaded in RAM indefinitely |
 
 ## Troubleshooting
 
