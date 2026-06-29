@@ -3,13 +3,12 @@
 
 FROM ollama/ollama:latest AS ollama-base
 
-FROM alpine:3.20
+FROM debian:bookworm-slim
 
-RUN apk add --no-cache \
-    libstdc++ \
+RUN apt-get update && apt-get install -y --no-install-recommends \
     curl \
     ca-certificates \
-    bash
+    && rm -rf /var/lib/apt/lists/*
 
 # Copy only the Ollama binary and CPU runners (skip ~3 GB of GPU/CUDA layers).
 COPY --from=ollama-base /usr/bin/ollama /usr/bin/ollama
