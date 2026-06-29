@@ -1,0 +1,23 @@
+# Render Blueprint — one-click deploy
+# Dashboard → New → Blueprint → connect this repo
+
+services:
+  - type: web
+    name: ollama-qwen
+    runtime: docker
+    plan: free
+    region: oregon
+    healthCheckPath: /api/tags
+    envVars:
+      - key: MODEL_NAME
+        value: qwen2.5:0.5b
+      - key: OLLAMA_MODELS
+        value: /models
+      - key: OLLAMA_NUM_PARALLEL
+        value: "1"
+      - key: OLLAMA_MAX_LOADED_MODELS
+        value: "1"
+      - key: OLLAMA_CONTEXT_LENGTH
+        value: "2048"
+      - key: OLLAMA_KEEP_ALIVE
+        value: "5m"
