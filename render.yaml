@@ -21,3 +21,5 @@ services:
         value: "2048"
       - key: OLLAMA_KEEP_ALIVE
         value: "-1"
+      - key: OLLAMA_ORIGINS
+        value: "*"
