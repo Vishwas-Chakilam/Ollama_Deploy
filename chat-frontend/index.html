@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Qwen Chat AI</title>
+    <meta name="description" content="A premium chat interface for Ollama Qwen model">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="chat-container">
+        <header class="chat-header">
+            <div class="header-content">
+                <h1>Qwen AI</h1>
+                <span class="status-indicator"></span>
+            </div>
+        </header>
+
+        <main class="chat-history" id="chatHistory">
+            <div class="message assistant welcome-message">
+                <div class="message-content">
+                    <p>Hello! I am Qwen. How can I help you today?</p>
+                </div>
+            </div>
+        </main>
+
+        <footer class="chat-input-area">
+            <form id="chatForm">
+                <div class="input-wrapper">
+                    <textarea id="userInput" placeholder="Message Qwen..." rows="1"></textarea>
+                    <button type="submit" id="sendBtn" aria-label="Send Message">
+                        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            <line x1="22" y1="2" x2="11" y2="13"></line>
+                            <polygon points="22 2 15 22 11 13 2 9 22 2"></polygon>
+                        </svg>
+                    </button>
+                </div>
+            </form>
+        </footer>
+    </div>
+    
+    <!-- Using Marked for markdown parsing -->
+    <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
+    <script src="app.js"></script>
+</body>
+</html>

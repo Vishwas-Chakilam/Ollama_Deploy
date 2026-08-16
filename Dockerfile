@@ -1,5 +1,5 @@
 # Minimal CPU-only Ollama for Render free tier (512 MB RAM).
-# Model qwen2.5:0.5b (~398 MB) is baked at build time to avoid re-downloading on every cold start.
+# Model smollm:135m (~80 MB) is baked at build time to avoid re-downloading on every cold start.
 
 FROM ollama/ollama:latest AS ollama-base
 
@@ -16,11 +16,11 @@ COPY --from=ollama-base /usr/lib/ollama /usr/lib/ollama
 
 ENV OLLAMA_MODELS=/models \
     OLLAMA_HOST=0.0.0.0:11434 \
-    MODEL_NAME=qwen2.5:0.5b
+    MODEL_NAME=smollm:135m
 
 RUN mkdir -p /models
 
-# Bake the model into the image during build (~70 MB Ollama + ~398 MB model ≈ 470 MB total).
+# Bake the model into the image during build (~70 MB Ollama + ~80 MB model ≈ 150 MB total).
 RUN ollama serve & \
     SERVER_PID=$! && \
     echo "Waiting for Ollama..." && \

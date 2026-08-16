@@ -12,7 +12,7 @@ def test_chat():
                 "content": "Why is the sky blue? Answer in two sentences."
             }
         ],
-        "stream": False
+        "stream": True  # Changed to True to stream responses
     }
     
     headers = {
@@ -25,15 +25,21 @@ def test_chat():
     print("Sending request to Ollama on Render (this may take a moment if the service is sleeping)...")
     try:
         with urllib.request.urlopen(req) as response:
-            response_data = response.read().decode("utf-8")
-            result = json.loads(response_data)
-            
             print("\n--- Response ---")
-            print(result.get("message", {}).get("content", "No content found."))
-            print("----------------")
-            print(f"Model used: {result.get('model')}")
-            print(f"Total duration: {result.get('total_duration', 0) / 1e9:.2f} seconds")
             
+            # Read the response line by line as it streams in
+            for line in response:
+                if line:
+                    chunk = json.loads(line.decode("utf-8"))
+                    if "message" in chunk and "content" in chunk["message"]:
+                        # Print each token as it arrives without a newline
+                        print(chunk["message"]["content"], end="", flush=True)
+                    
+                    if chunk.get("done"):
+                        print("\n----------------")
+                        print(f"Total duration: {chunk.get('total_duration', 0) / 1e9:.2f} seconds")
+                        break
+                        
     except urllib.error.HTTPError as e:
         print(f"HTTP Error: {e.code} - {e.reason}")
         print(e.read().decode("utf-8"))

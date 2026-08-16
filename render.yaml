@@ -3,14 +3,14 @@
 
 services:
   - type: web
-    name: ollama-qwen
+    name: ollama-smollm
     runtime: docker
     plan: free
     region: oregon
     healthCheckPath: /api/tags
     envVars:
       - key: MODEL_NAME
-        value: qwen2.5:0.5b
+        value: smollm:135m
       - key: OLLAMA_MODELS
         value: /models
       - key: OLLAMA_NUM_PARALLEL
@@ -18,8 +18,8 @@ services:
       - key: OLLAMA_MAX_LOADED_MODELS
         value: "1"
       - key: OLLAMA_CONTEXT_LENGTH
-        value: "2048"
+        value: "512"
       - key: OLLAMA_KEEP_ALIVE
-        value: "-1"
+        value: "1h"
       - key: OLLAMA_ORIGINS
         value: "*"
